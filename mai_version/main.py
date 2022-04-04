@@ -123,8 +123,7 @@ def run_program(settings: ProgramSettings):
 		if settings.kb_format is KnowledgeBaseFormat.MODELS:
 			possible_labels = parsed_settings.possible_labels
 			training_examples_collection, background_knowledge_wrapper \
-				= preprocessing_examples_models(fname_labeled_examples, parsed_settings,
-												settings.internal_examples_format, fname_background_knowledge)
+				= preprocessing_examples_models(fname_labeled_examples, parsed_settings, settings.internal_examples_format, fname_background_knowledge)
 			prediction_goal = None
 			index_of_label_var = None
 		elif settings.kb_format is KnowledgeBaseFormat.KEYS:
@@ -137,24 +136,39 @@ def run_program(settings: ProgramSettings):
 		engine = DefaultEngine()
 		engine.unknown = 1
 
-		full_background_knowledge_sp = background_knowledge_wrapper.get_full_background_knowledge_simple_program()
-		tree = build_tree(settings.internal_examples_format, settings.treebuilder_type, parsed_settings.language,
-						  possible_labels, training_examples_collection, prediction_goal=prediction_goal,
-						  full_background_knowledge_sp=full_background_knowledge_sp,
-						  debug_printing_tree_building=debug_printing, engine=engine)
+		full_background_knowledge_sp = \
+			background_knowledge_wrapper.get_full_background_knowledge_simple_program()
+		tree = build_tree(
+			settings.internal_examples_format,
+			settings.treebuilder_type,
+			parsed_settings.language,
+			possible_labels,
+			training_examples_collection,
+			prediction_goal,
+			full_background_knowledge_sp,
+			debug_printing_tree_building = debug_printing,
+			engine = engine,
+		)
 
 		tree = prune_tree(tree)
 
-		program = convert_tree_to_program(settings.kb_format, settings.treebuilder_type, tree, parsed_settings.language,
-										  debug_printing=debug_printing, prediction_goal=prediction_goal,
-										  index_of_label_var=index_of_label_var)
+		program = convert_tree_to_program(
+			settings.kb_format,
+			settings.treebuilder_type,
+			tree,
+			parsed_settings.language,
+			debug_printing,
+			prediction_goal,
+			index_of_label_var,
+		)
+		return program
 
 
 def main(argv=sys.argv[1:]):
 	argparser = make_cli_argument_parser()  # type: argparse.ArgumentParser
 	cli_arguments = argparser.parse_args(argv)
 	program_settings = ProgramSettings.make_program_settings(cli_arguments)
-	run_program(program_settings)
+	return run_program(program_settings)
 
 
 if __name__ == '__main__':
