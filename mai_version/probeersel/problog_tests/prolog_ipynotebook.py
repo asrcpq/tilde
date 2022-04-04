@@ -57,13 +57,13 @@ query_term = sibling(None, None)
 res = engine.query(db, query_term)
 
 for args in res:
-    print(query_term(*args))
+	print(query_term(*args))
 
 print('siblings of sally:')
 query_term = Term('sibling', Term('sally'), None)
 res = engine.query(db, query_term)
 
 for args in res:
-    print(query_term(*args))
+	print(query_term(*args))
 
 print(engine.ground_all(db, queries=[query_term]))

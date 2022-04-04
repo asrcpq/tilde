@@ -30,12 +30,12 @@ treebuilder_type = TreeBuilderType.MLEDETERMINISTIC
 internal_ex_format = InternalExampleFormat.CLAUSEDB
 
 run_keys(file_name_labeled_examples, parsed_settings, internal_ex_format, treebuilder_type,
-         fname_background_knowledge=file_name_background,
-         stop_criterion_handler=StopCriterionMinimalCoverage(4),
-         debug_printing_example_parsing=debug_printing_example_parsing,
-         debug_printing_tree_building=debug_printing_tree_building,
-         debug_printing_tree_pruning=debug_printing_tree_pruning,
-         debug_printing_program_conversion=debug_printing_program_conversion,
-         debug_printing_get_classifier=debug_printing_get_classifier,
-         debug_printing_classification=debug_printing_classification
-         )
+		 fname_background_knowledge=file_name_background,
+		 stop_criterion_handler=StopCriterionMinimalCoverage(4),
+		 debug_printing_example_parsing=debug_printing_example_parsing,
+		 debug_printing_tree_building=debug_printing_tree_building,
+		 debug_printing_tree_pruning=debug_printing_tree_pruning,
+		 debug_printing_program_conversion=debug_printing_program_conversion,
+		 debug_printing_get_classifier=debug_printing_get_classifier,
+		 debug_printing_classification=debug_printing_classification
+		 )

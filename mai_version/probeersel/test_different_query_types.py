@@ -23,11 +23,11 @@ generate([H|T]) :-
 	generate(T).
 
 test(Sol) :-
-        % test all row constraints:
+		% test all row constraints:
 	test2([r1,r2,r3,r4,r5,r6,r7,r8,r9],Sol), % r1= first row, ...
-        % test all column constraints:
+		% test all column constraints:
 	test2([c1,c2,c3,c4,c5,c6,c7,c8,c9],Sol), % c1= first column, ...
-        % test all block constraints:
+		% test all block constraints:
 	test2([b1,b2,b3,b4,b5,b6,b7,b8,b9],Sol). % b1= first block, ...
 
 
@@ -109,7 +109,7 @@ query = PrologString("solve([_,_,_,2,3,_,_,_,5,_,4,2,_,9,_,_,_,3,3,_,_,_,_,8,7,_
 query1 = None
 
 for item in query:
-    query1 = item
+	query1 = item
 
 
 engine = DefaultEngine()
@@ -125,21 +125,21 @@ db2 = db.extend()
 db2 += Term('query')(query1)
 
 for i in range(0, 100):
-    start = timeit.default_timer()
-    results = engine.query(db, query1)
-    end = timeit.default_timer()
-    gc.collect()
-    times_query.append(end - start)
-    # print([query1(*args) for args in results])
-    print(results)
+	start = timeit.default_timer()
+	results = engine.query(db, query1)
+	end = timeit.default_timer()
+	gc.collect()
+	times_query.append(end - start)
+	# print([query1(*args) for args in results])
+	print(results)
 
 for i in range(0, 100):
-    start = timeit.default_timer()
-    query_result = problog.get_evaluatable().create_from(db, engine=engine).evaluate()
-    end = timeit.default_timer()
-    gc.collect()
-    times_query_extended.append(end - start)
-    print(query_result)
+	start = timeit.default_timer()
+	query_result = problog.get_evaluatable().create_from(db, engine=engine).evaluate()
+	end = timeit.default_timer()
+	gc.collect()
+	times_query_extended.append(end - start)
+	print(query_result)
 
 print("average duration query:", statistics.mean(times_query), "seconds")
 print("average duration query:", statistics.mean(times_query_extended), "seconds")

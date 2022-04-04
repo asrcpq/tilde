@@ -41,21 +41,21 @@ fold_suffix = '.txt'
 
 # -- create output directory
 if not os.path.exists(doutput):
-    os.makedirs(doutput)
+	os.makedirs(doutput)
 
 print("start financial")
 save_stdout = sys.stdout
 if hide_printouts:
-    sys.stdout = open(os.devnull, "w")
+	sys.stdout = open(os.devnull, "w")
 
 main_cross_validation(fname_examples=fname_examples, fname_settings=fname_settings, fname_background=fname_background,
-                      dir_fold_files=dfold, fname_prefix_fold=fname_prefix_fold, fold_start_index=fold_start_index,
-                      nb_folds=nb_folds, fold_suffix=fold_suffix, dir_output_files=doutput,
-                      filter_out_unlabeled_examples=filter_out_unlabeled_examples,
-                      debug_printing_tree_building=debug_printing_tree_building,
-                      debug_printing_program_conversion=debug_printing_program_conversion,
-                      debug_printing_get_classifier=debug_printing_get_classifier,
-                      debug_printing_classification=debug_printing_classification)
+					  dir_fold_files=dfold, fname_prefix_fold=fname_prefix_fold, fold_start_index=fold_start_index,
+					  nb_folds=nb_folds, fold_suffix=fold_suffix, dir_output_files=doutput,
+					  filter_out_unlabeled_examples=filter_out_unlabeled_examples,
+					  debug_printing_tree_building=debug_printing_tree_building,
+					  debug_printing_program_conversion=debug_printing_program_conversion,
+					  debug_printing_get_classifier=debug_printing_get_classifier,
+					  debug_printing_classification=debug_printing_classification)
 if hide_printouts:
-    sys.stdout = save_stdout
+	sys.stdout = save_stdout
 print("finished financial")

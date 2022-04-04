@@ -30,15 +30,15 @@ treebuilder_type = TreeBuilderType.DETERMINISTIC
 
 
 if use_clausedb:
-    internal_ex_format = InternalExampleFormat.CLAUSEDB
+	internal_ex_format = InternalExampleFormat.CLAUSEDB
 else:
-    internal_ex_format = InternalExampleFormat.SIMPLEPROGRAM
+	internal_ex_format = InternalExampleFormat.SIMPLEPROGRAM
 
 run_models(file_name_labeled_examples, parsed_settings, internal_ex_format, treebuilder_type,
-           debug_printing_example_parsing=debug_printing_example_parsing,
-           debug_printing_tree_building=debug_printing_tree_building,
-           debug_printing_tree_pruning=debug_printing_tree_pruning,
-           debug_printing_program_conversion=debug_printing_program_conversion,
-           debug_printing_get_classifier=debug_printing_get_classifier,
-           debug_printing_classification=debug_printing_classification
-           )
+		   debug_printing_example_parsing=debug_printing_example_parsing,
+		   debug_printing_tree_building=debug_printing_tree_building,
+		   debug_printing_tree_pruning=debug_printing_tree_pruning,
+		   debug_printing_program_conversion=debug_printing_program_conversion,
+		   debug_printing_get_classifier=debug_printing_get_classifier,
+		   debug_printing_classification=debug_printing_classification
+		   )

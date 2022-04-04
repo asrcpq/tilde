@@ -7,83 +7,83 @@ print(itemnbs)
 
 #####################
 def rainy_weather(count):
-    return "weather(" + str(count) + ", rainy).\n"
+	return "weather(" + str(count) + ", rainy).\n"
 
 
 def sunny_weather(count):
-    return "weather(" + str(count) + ", sunny).\n"
+	return "weather(" + str(count) + ", sunny).\n"
 
 
 def do_walk(count):
-    return "walk(" + str(count) + ", no).\n"
+	return "walk(" + str(count) + ", no).\n"
 
 
 def do_not_walk(count):
-    return "walk(" + str(count) + ", yes).\n"
+	return "walk(" + str(count) + ", yes).\n"
 
 
 def hot_temperature(count):
-    return "temperature(" + str(count) + ", hot).\n"
+	return "temperature(" + str(count) + ", hot).\n"
 
 
 def cold_temperature(count):
-    return "temperature(" + str(count) + ", cold).\n"
+	return "temperature(" + str(count) + ", cold).\n"
 
 
 def mild_windy(count):
-    return "windy(" + str(count) + ", mild).\n"
+	return "windy(" + str(count) + ", mild).\n"
 
 
 def storm_windy(count):
-    return "windy(" + str(count) + ", storm).\n"
+	return "windy(" + str(count) + ", storm).\n"
 
 
 ###############################
 def walking(count, item, offset, divisor):
-    if float(item) <= offset + divisor:
-        return do_walk(count)
-    else:
-        return do_not_walk(count)
+	if float(item) <= offset + divisor:
+		return do_walk(count)
+	else:
+		return do_not_walk(count)
 
 
 def windy(count, item, offset, divisor):
-    if float(item) <= offset + divisor:
-        return mild_windy(count) + walking(count, item, offset, divisor / 2)
-    else:
-        return storm_windy(count) + walking(count, item, offset + divisor, divisor / 2)
+	if float(item) <= offset + divisor:
+		return mild_windy(count) + walking(count, item, offset, divisor / 2)
+	else:
+		return storm_windy(count) + walking(count, item, offset + divisor, divisor / 2)
 
 
 # -----------------
 def weather(count, item, offset, divisor):
-    if float(item) <= offset + divisor:
-        return rainy_weather(count) + windy(count, item, offset, divisor / 2)
-    else:
-        return sunny_weather(count) + windy(count, item, offset + divisor, divisor / 2)
+	if float(item) <= offset + divisor:
+		return rainy_weather(count) + windy(count, item, offset, divisor / 2)
+	else:
+		return sunny_weather(count) + windy(count, item, offset + divisor, divisor / 2)
 
 
 # -----------------------------
 def temperature(count, item, offset, divisor):
-    if float(item) <= offset + divisor:
-        return hot_temperature(count) + weather(count, item, offset, divisor / 2)
-    else:
-        return cold_temperature(count) + weather(count, item, offset + divisor, divisor / 2)
+	if float(item) <= offset + divisor:
+		return hot_temperature(count) + weather(count, item, offset, divisor / 2)
+	else:
+		return cold_temperature(count) + weather(count, item, offset + divisor, divisor / 2)
 
 
 ###########################
 for index, item in enumerate(itemnbs):
-    # temperature
-    id = index + 1
-    prologstr = prologstr + temperature(id, item, 0, 16 / 2) + "\n"
+	# temperature
+	id = index + 1
+	prologstr = prologstr + temperature(id, item, 0, 16 / 2) + "\n"
 
-    # if item == "1":
-    #     prologstr = prologstr + rainy_weather(count) + do_walk(count) + "\n"
-    # elif item == "2":
-    #     prologstr = prologstr + rainy_weather(count) + do_not_walk(count) + "\n"
-    # elif item == "3":
-    #     prologstr = prologstr + sunny_weather(count) + do_walk(count) + "\n"
-    # elif item ==  "4":
-    #     prologstr = prologstr + sunny_weather(count) + do_not_walk(count) + "\n"
-    # else :
-    #     raise Exception("something went wrong")
+	# if item == "1":
+	#     prologstr = prologstr + rainy_weather(count) + do_walk(count) + "\n"
+	# elif item == "2":
+	#     prologstr = prologstr + rainy_weather(count) + do_not_walk(count) + "\n"
+	# elif item == "3":
+	#     prologstr = prologstr + sunny_weather(count) + do_walk(count) + "\n"
+	# elif item ==  "4":
+	#     prologstr = prologstr + sunny_weather(count) + do_not_walk(count) + "\n"
+	# else :
+	#     raise Exception("something went wrong")
 
 print(prologstr)

@@ -13,7 +13,7 @@ substitution = {}
 
 # NOTE: all variables in the term need to be defined in the substitution
 for var in term_vars.variables():
-    substitution[var] = var
+	substitution[var] = var
 
 substitution[var_A] = Constant(3)
 

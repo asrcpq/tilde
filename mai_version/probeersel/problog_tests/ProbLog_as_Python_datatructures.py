@@ -3,7 +3,7 @@ from problog.logic import Constant,Var,Term,AnnotatedDisjunction
 from problog import get_evaluatable
 
 coin,heads,tails,win,query =\
-    Term('coin'),Term('heads'),Term('tails'),Term('win'),Term('query')
+	Term('coin'),Term('heads'),Term('tails'),Term('win'),Term('query')
 C = Var('C')
 p = SimpleProgram()
 p += coin(Constant('c1'))

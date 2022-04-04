@@ -2,9 +2,9 @@ from enum import Enum
 
 
 class KnowledgeBaseFormatException(Exception):
-    pass
+	pass
 
 
 class KnowledgeBaseFormat(Enum):
-    MODELS = 1
-    KEYS = 2
+	MODELS = 1
+	KEYS = 2

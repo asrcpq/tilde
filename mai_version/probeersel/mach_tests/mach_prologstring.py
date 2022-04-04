@@ -2,9 +2,9 @@
 Simple ProbLog code for the machine example encoded as PrologStrings.
 
 1. Encode as a PrologString (subclass of LogicProgram):
-    a. one example
-    b. the background knowledge
-    c. the logic program encoding the decision tree
+	a. one example
+	b. the background knowledge
+	c. the logic program encoding the decision tree
 2.
 
 """
@@ -43,26 +43,26 @@ db_lp = eng.prepare(logic_program)  # type: ClauseDB
 # db logic program + example + queries
 db_lp_q = db_lp.extend()
 for q in query_terms:
-    db_lp_q += q
+	db_lp_q += q
 # ========================================================
 # db logic program + example
 db_lp_q_ex = db_lp_q.extend()  # type: ClauseDB
 for e in example1_prolog_string:
-    db_lp_q_ex += e
+	db_lp_q_ex += e
 
 # printing
 for s in db_lp:
-    print(s)
+	print(s)
 for s in db_lp_q:
-    print(s)
+	print(s)
 for s in db_lp_q_ex:
-    print(s)
+	print(s)
 
 
 query_results = problog.get_evaluatable().create_from(db_lp_q_ex, engine=eng).evaluate()
 for key in query_results:
-    value = query_results[key]
-    print(value)
+	value = query_results[key]
+	print(value)
 
 print(query_results)
 

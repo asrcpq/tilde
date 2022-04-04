@@ -45,18 +45,18 @@ prediction_goal = prediction_goal_handler.get_prediction_goal()  # type: Term
 
 print('=== START parsing background ===')
 background_knowledge_wrapper \
-    = parse_background_knowledge_keys(fname_background_knowledge,
-                                      prediction_goal)  # type: BackgroundKnowledgeWrapper
+	= parse_background_knowledge_keys(fname_background_knowledge,
+									  prediction_goal)  # type: BackgroundKnowledgeWrapper
 
 full_background_knowledge_sp \
-    = background_knowledge_wrapper.get_full_background_knowledge_simple_program()  # type: Optional[SimpleProgram]
+	= background_knowledge_wrapper.get_full_background_knowledge_simple_program()  # type: Optional[SimpleProgram]
 print('=== END parsing background ===\n')
 # =================================================================================================================
 print('=== START parsing examples ===')
 # EXAMPLES
 example_builder = KeysExampleBuilder(prediction_goal, debug_printing_example_parsing)
 training_examples_collection = example_builder.parse(internal_ex_format, file_name_labeled_examples,
-                                                     full_background_knowledge_sp)  # type: ExampleCollection
+													 full_background_knowledge_sp)  # type: ExampleCollection
 
 # =================================================================================================================
 
@@ -64,7 +64,7 @@ print('=== START collecting labels ===')
 # LABELS
 index_of_label_var = prediction_goal_handler.get_predicate_goal_index_of_label_var()  # type: int
 label_collector = LabelCollectorMapper.get_label_collector(internal_ex_format, prediction_goal, index_of_label_var,
-                                                           engine=engine)
+														   engine=engine)
 label_collector.extract_labels(training_examples_collection)
 
 possible_labels = label_collector.get_labels()  # type: Set[Label]
@@ -80,41 +80,41 @@ examples = default_handler.get_transformed_example_list(training_examples_collec
 run_time_list = []
 
 for i in range(0, 1):
-    print('=== START tree building ===')
+	print('=== START tree building ===')
 
-    # test_evaluator = SimpleProgramQueryEvaluator(engine=engine)
-    # splitter = ProblogSplitter(language=language,split_criterion_str='entropy', test_evaluator=test_evaluator,
-    #                            query_head_if_keys_format=prediction_goal)
-    tree_builder = default_handler.get_default_decision_tree_builder(language, prediction_goal)  # type: TreeBuilder
-    decision_tree = DecisionTree()
+	# test_evaluator = SimpleProgramQueryEvaluator(engine=engine)
+	# splitter = ProblogSplitter(language=language,split_criterion_str='entropy', test_evaluator=test_evaluator,
+	#                            query_head_if_keys_format=prediction_goal)
+	tree_builder = default_handler.get_default_decision_tree_builder(language, prediction_goal)  # type: TreeBuilder
+	decision_tree = DecisionTree()
 
-    start_time = time.time()
-    decision_tree.fit(examples=examples, tree_builder=tree_builder)
-    end_time = time.time()
-    run_time_sec = end_time - start_time
-    run_time_ms = 1000.0 * run_time_sec
-    run_time_list.append(run_time_ms)
-    print("run time (ms):", run_time_ms)
+	start_time = time.time()
+	decision_tree.fit(examples=examples, tree_builder=tree_builder)
+	end_time = time.time()
+	run_time_sec = end_time - start_time
+	run_time_ms = 1000.0 * run_time_sec
+	run_time_list.append(run_time_ms)
+	print("run time (ms):", run_time_ms)
 
-    test_examples = []
-    for ex_wr_sp in training_examples_collection.get_example_wrappers_sp():
-        example_clause = build_clause(ex_wr_sp, training=False)
-        example = Example(data=example_clause, label=ex_wr_sp.label)
-        example.classification_term = ex_wr_sp.classification_term
-        test_examples.append(example)
+	test_examples = []
+	for ex_wr_sp in training_examples_collection.get_example_wrappers_sp():
+		example_clause = build_clause(ex_wr_sp, training=False)
+		example = Example(data=example_clause, label=ex_wr_sp.label)
+		example.classification_term = ex_wr_sp.classification_term
+		test_examples.append(example)
 
-    statistics_handler = verify(decision_tree, test_examples)
-    accuracy = statistics_handler.get_accuracy()
-    print("accuracy:", accuracy)
+	statistics_handler = verify(decision_tree, test_examples)
+	accuracy = statistics_handler.get_accuracy()
+	print("accuracy:", accuracy)
 
-    # first_test_example = test_examples[0]
-    # prediction = decision_tree.predict(first_test_example)
-    # print("prediction:", prediction)
+	# first_test_example = test_examples[0]
+	# prediction = decision_tree.predict(first_test_example)
+	# print("prediction:", prediction)
 
-    for instance in test_examples:
-        instance.destruct()
+	for instance in test_examples:
+		instance.destruct()
 
-    print('=== END tree building ===\n')
+	print('=== END tree building ===\n')
 
 average_run_time_ms = statistics.mean(run_time_list)
 print("average tree build time (ms):", average_run_time_ms)
@@ -123,7 +123,7 @@ print(decision_tree)
 
 print("=== start destructing examples ===")
 for instance in examples:
-    instance.data.destruct()
+	instance.data.destruct()
 print("=== end destructing examples ===")
 
 

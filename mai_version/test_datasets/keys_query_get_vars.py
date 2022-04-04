@@ -22,20 +22,20 @@ engine.unknown = 1
 
 db = engine.prepare(background_knw)
 query_body = Term('machine')(Var('A'), Var('B')) \
-             & (Term('worn')(Var('A'), Var('C')) & (Term('not_replaceable')(Var('C'))))
+			 & (Term('worn')(Var('A'), Var('C')) & (Term('not_replaceable')(Var('C'))))
 query_head = (Term('predicateToQuery')(Var('A'), Var('C'), Var('B')))
 query_rule_for_db = (query_head << query_body)
 # db += query
 
 for example in examples:
-    db_example = db.extend()
-    for statement in example:
-        db_example += statement
-    db_example += query_rule_for_db
-    # for statement in db:
-    #     print(statement)
-    # for statement in db_example:
-    #     print(statement)
-    # print("query:", query_rule_for_db)
-    example_satisfies_query = engine.query(db_example, query_head)
-    print(example_satisfies_query)
+	db_example = db.extend()
+	for statement in example:
+		db_example += statement
+	db_example += query_rule_for_db
+	# for statement in db:
+	#     print(statement)
+	# for statement in db_example:
+	#     print(statement)
+	# print("query:", query_rule_for_db)
+	example_satisfies_query = engine.query(db_example, query_head)
+	print(example_satisfies_query)

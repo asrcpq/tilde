@@ -14,6 +14,6 @@ print(get_evaluatable().create_from(p).evaluate())
 
 '''
 class.create_from(object):
-    automagically transforms object to an object of the class
+	automagically transforms object to an object of the class
 
 '''

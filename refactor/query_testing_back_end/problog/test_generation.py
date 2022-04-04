@@ -9,23 +9,23 @@ from refactor.tilde_essentials.refinement_controller import RefinementController
 
 
 class ProbLogTestGeneratorBuilder(FOLTestGeneratorBuilder):
-    def __init__(self, language: TypeModeLanguage,
-                 query_head_if_keys_format: Optional[Term] = None):
-        super().__init__(ProbLogTestGeneratorBuilder.get_initial_query(query_head_if_keys_format))
-        self.language = language
+	def __init__(self, language: TypeModeLanguage,
+				 query_head_if_keys_format: Optional[Term] = None):
+		super().__init__(ProbLogTestGeneratorBuilder.get_initial_query(query_head_if_keys_format))
+		self.language = language
 
-    def generate_possible_tests(self, examples, current_node):
-        query_to_refine = self._get_associated_query(current_node)
-        return RefinementController.get_refined_query_generator(
-            query_to_refine, self.language)
+	def generate_possible_tests(self, examples, current_node):
+		query_to_refine = self._get_associated_query(current_node)
+		return RefinementController.get_refined_query_generator(
+			query_to_refine, self.language)
 
-    @staticmethod
-    def get_initial_query(query_head_if_keys_format: Optional[Term] = None):
-        if query_head_if_keys_format is not None:
-            initial_query = TILDEQueryHiddenLiteral(query_head_if_keys_format)
-        else:
-            initial_query = TILDEQuery(None, None)
-        return initial_query
+	@staticmethod
+	def get_initial_query(query_head_if_keys_format: Optional[Term] = None):
+		if query_head_if_keys_format is not None:
+			initial_query = TILDEQueryHiddenLiteral(query_head_if_keys_format)
+		else:
+			initial_query = TILDEQuery(None, None)
+		return initial_query
 
 
 # class ProblogSplitter(Splitter):

@@ -43,11 +43,11 @@ dout_relative = 'output'
 
 
 file_name_data = FileNameData(root_dir=droot,
-                              logic_relative_dir=dlogic_relative,
-                              fold_relative_dir=dfold_relative,
-                              output_relative_dir=dout_relative,
-                              test_name=test_name,
-                              logic_name=logic_name)
+							  logic_relative_dir=dlogic_relative,
+							  fold_relative_dir=dfold_relative,
+							  output_relative_dir=dout_relative,
+							  test_name=test_name,
+							  logic_name=logic_name)
 
 default_handler = get_back_end_default(QueryBackEnd.SUBTLE)
 
@@ -59,11 +59,11 @@ fold_suffix = '.txt'
 
 
 fold_info_controller = FoldInfoController(
-    fold_file_directory=file_name_data.fold_dir,
-    fold_fname_prefix=fname_prefix_fold,
-    fold_start_index=fold_start_index,
-    nb_folds=nb_folds,
-    fold_suffix=fold_suffix)
+	fold_file_directory=file_name_data.fold_dir,
+	fold_fname_prefix=fname_prefix_fold,
+	fold_start_index=fold_start_index,
+	nb_folds=nb_folds,
+	fold_suffix=fold_suffix)
 
 run_experiment(file_name_data, fold_info_controller, default_handler,
-               hide_printouts, filter_out_unlabeled_examples, debug_printing_options)
+			   hide_printouts, filter_out_unlabeled_examples, debug_printing_options)

@@ -40,9 +40,9 @@ possible_targets = settings.possible_labels  # type: List[Label]
 
 # BACKGROUND KNOWLEDGE
 if fname_background_knowledge is not None:
-    background_knowledge = parse_background_knowledge(fname_background_knowledge)  # type: PrologFile
+	background_knowledge = parse_background_knowledge(fname_background_knowledge)  # type: PrologFile
 else:
-    background_knowledge = None
+	background_knowledge = None
 
 # EXAMPLES
 examples = ModelsExampleParser.parse(fname_labeled_examples, possible_targets)

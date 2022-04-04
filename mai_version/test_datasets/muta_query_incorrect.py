@@ -181,7 +181,7 @@ db = engine.prepare(background_knowledge)
 
 db += (to_query << query)
 for statement in example:
-    db += statement
+	db += statement
 
 results = engine.query(db, to_query)
 print(results)
@@ -190,7 +190,7 @@ print(results)
 # === MANIER 3: manier 2 naar string omzetten, concateneren en dan als PrologString ====#
 prolog_string = ""
 for statement in db:
-    prolog_string = prolog_string + str(statement) + ".\n"
+	prolog_string = prolog_string + str(statement) + ".\n"
 
 example = PrologString(prolog_string)
 db = engine.prepare(example)

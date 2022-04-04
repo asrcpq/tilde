@@ -1,5 +1,5 @@
 from mai_version.probeersel.mach_tests.mach_definitions_TILDE_paper import labeled_examples, background_knowledge, possible_targets, \
-    language_machines
+	language_machines
 from mai_version.probeersel.mach_tests.mach_definitions_examples_ACE import ex1
 from mai_version.trees.tree_converter import convert_tree_to_simple_program
 

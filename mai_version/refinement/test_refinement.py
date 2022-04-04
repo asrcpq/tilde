@@ -7,7 +7,7 @@ Y = Var('Y')
 Z = Var('Z')
 
 sendback, fix, ok, worn, replaceable = \
-    Term('sendback'), Term('fix'), Term('ok'), Term('worn'), Term('replaceable')
+	Term('sendback'), Term('fix'), Term('ok'), Term('worn'), Term('replaceable')
 
 not_replaceable = Term('not_replaceable')
 

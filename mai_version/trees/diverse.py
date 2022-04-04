@@ -1,16 +1,16 @@
 from mai_version.trees.TreeNode import FOLDecisitionTree
 
 def learn_FOLDT(example_list):
-    """Learn a FOLDT using a list of labeled examples"""
-    foldt = FOLDecisitionTree()
+	"""Learn a FOLDT using a list of labeled examples"""
+	foldt = FOLDecisitionTree()
 
 
 def is_current_example_set_sufficiently_homogenous(examples):
-    """
-    Test to decide whether to turn a node into a leaf
-    :return:
-    """
-    return False
+	"""
+	Test to decide whether to turn a node into a leaf
+	:return:
+	"""
+	return False
 
 
 # def get_best_refined_query(query, example_list):
@@ -26,39 +26,39 @@ def is_current_example_set_sufficiently_homogenous(examples):
 
 
 def get_majority_class_of_example_set(query, example_list):
-    pass
+	pass
 
 
 def compute_score_for_possible_test_in_node():
-    """
-    TILDE uses the INFORMATION GAIN to determine the best test
-    :return:
-    """
-    pass
+	"""
+	TILDE uses the INFORMATION GAIN to determine the best test
+	:return:
+	"""
+	pass
 
 
 def compute_all_possible_tests_in_node():
-    """
-    This is the most important difference from a traditional propositional tree learner
-    --> the generation of tests to be incorporated in the nodes.
+	"""
+	This is the most important difference from a traditional propositional tree learner
+	--> the generation of tests to be incorporated in the nodes.
 
-    Algorithm in book: employs a refinement operator rho under theta-subsumpion.
+	Algorithm in book: employs a refinement operator rho under theta-subsumpion.
 
-    Assumpion in example:
-    the refinement operator specializes a query Q, i.e. a set of literals,
-    by adding literals l to the query
-    yielding the query Q,l
+	Assumpion in example:
+	the refinement operator specializes a query Q, i.e. a set of literals,
+	by adding literals l to the query
+	yielding the query Q,l
 
-    from the paper:
-    rho maps a clause onto a set of clauses,
-    such that for any clause c and for all c' in rho(c):
-        c theta-subsumes c'
-    A clause c1 theta-subsumes another clause c2
-        iff
-    there is a variable substitution theta
-        such that c1 theta is a subset of c2
+	from the paper:
+	rho maps a clause onto a set of clauses,
+	such that for any clause c and for all c' in rho(c):
+		c theta-subsumes c'
+	A clause c1 theta-subsumes another clause c2
+		iff
+	there is a variable substitution theta
+		such that c1 theta is a subset of c2
 
 
-    :return:
-    """
-    pass
+	:return:
+	"""
+	pass

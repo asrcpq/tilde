@@ -30,21 +30,21 @@ debug_printing_classification = True
 parsed_settings = ModelsSettingsParser().parse(file_name_settings)
 
 if use_mle:
-    treebuilder_type = TreeBuilderType.MLEDETERMINISTIC
+	treebuilder_type = TreeBuilderType.MLEDETERMINISTIC
 else:
-    treebuilder_type = TreeBuilderType.DETERMINISTIC
+	treebuilder_type = TreeBuilderType.DETERMINISTIC
 
 if use_clausedb:
-    internal_ex_format = InternalExampleFormat.CLAUSEDB
+	internal_ex_format = InternalExampleFormat.CLAUSEDB
 else:
-    internal_ex_format = InternalExampleFormat.SIMPLEPROGRAM
+	internal_ex_format = InternalExampleFormat.SIMPLEPROGRAM
 
 run_models(file_name_labeled_examples, parsed_settings, internal_ex_format, treebuilder_type,
-           fname_background_knowledge=file_name_background,
-           debug_printing_example_parsing=debug_printing_example_parsing,
-           debug_printing_tree_building=debug_printing_tree_building,
-           debug_printing_tree_pruning=debug_printing_tree_pruning,
-           debug_printing_program_conversion=debug_printing_program_conversion,
-           debug_printing_get_classifier=debug_printing_get_classifier,
-           debug_printing_classification=debug_printing_classification
-           )
+		   fname_background_knowledge=file_name_background,
+		   debug_printing_example_parsing=debug_printing_example_parsing,
+		   debug_printing_tree_building=debug_printing_tree_building,
+		   debug_printing_tree_pruning=debug_printing_tree_pruning,
+		   debug_printing_program_conversion=debug_printing_program_conversion,
+		   debug_printing_get_classifier=debug_printing_get_classifier,
+		   debug_printing_classification=debug_printing_classification
+		   )

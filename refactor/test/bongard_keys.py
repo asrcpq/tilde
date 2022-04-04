@@ -6,7 +6,7 @@ from problog.engine import DefaultEngine
 from refactor.back_end_picking import get_back_end_default, QueryBackEnd
 from refactor.tilde_essentials.tree import DecisionTree
 from refactor.tilde_essentials.tree_builder import TreeBuilder
-from refactor.query_testing_back_end.django.clause_handling import destruct_tree_tests
+# from refactor.query_testing_back_end.django.clause_handling import destruct_tree_tests
 from refactor.io.label_collector import LabelCollectorMapper
 from refactor.io.parsing_background_knowledge import parse_background_knowledge_keys
 from refactor.io.parsing_examples import KeysExampleBuilder
@@ -44,18 +44,18 @@ prediction_goal = prediction_goal_handler.get_prediction_goal()  # type: Term
 
 print('=== START parsing background ===')
 background_knowledge_wrapper \
-    = parse_background_knowledge_keys(fname_background_knowledge,
-                                      prediction_goal)  # type: BackgroundKnowledgeWrapper
+	= parse_background_knowledge_keys(fname_background_knowledge,
+									  prediction_goal)  # type: BackgroundKnowledgeWrapper
 
 full_background_knowledge_sp \
-    = background_knowledge_wrapper.get_full_background_knowledge_simple_program()  # type: Optional[SimpleProgram]
+	= background_knowledge_wrapper.get_full_background_knowledge_simple_program()  # type: Optional[SimpleProgram]
 print('=== END parsing background ===\n')
 # =================================================================================================================
 print('=== START parsing examples ===')
 # EXAMPLES
 example_builder = KeysExampleBuilder(prediction_goal, debug_printing_example_parsing)
 training_examples_collection = example_builder.parse(internal_ex_format, file_name_labeled_examples,
-                                                     full_background_knowledge_sp)  # type: ExampleCollection
+													 full_background_knowledge_sp)  # type: ExampleCollection
 
 # =================================================================================================================
 
@@ -63,7 +63,7 @@ print('=== START collecting labels ===')
 # LABELS
 index_of_label_var = prediction_goal_handler.get_predicate_goal_index_of_label_var()  # type: int
 label_collector = LabelCollectorMapper.get_label_collector(internal_ex_format, prediction_goal, index_of_label_var,
-                                                           engine=engine)
+														   engine=engine)
 label_collector.extract_labels(training_examples_collection)
 
 possible_labels = label_collector.get_labels()  # type: Set[Label]
@@ -72,62 +72,62 @@ print('=== END collecting labels ===\n')
 
 
 default_handlers = [
-    # ('django', get_back_end_default(QueryBackEnd.DJANGO)),
-    # ('problog-simple', get_back_end_default(QueryBackEnd.SIMPLE_PROGRAM)),
-    ('subtle', get_back_end_default(QueryBackEnd.SUBTLE)),
-    # ('FLGG', get_back_end_default(QueryBackEnd.FLGG))
+	# ('django', get_back_end_default(QueryBackEnd.DJANGO)),
+	# ('problog-simple', get_back_end_default(QueryBackEnd.SIMPLE_PROGRAM)),
+	('subtle', get_back_end_default(QueryBackEnd.SUBTLE)),
+	# ('FLGG', get_back_end_default(QueryBackEnd.FLGG))
 ]
 
 
 average_run_time_list = []
 
 for name, default_handler in default_handlers:
-    # =================================================================================================================
+	# =================================================================================================================
 
-    examples = default_handler.get_transformed_example_list(training_examples_collection)
+	examples = default_handler.get_transformed_example_list(training_examples_collection)
 
-    # =================================================================================================================
+	# =================================================================================================================
 
-    run_time_list = []
+	run_time_list = []
 
-    for i in range(0, 10):
-        print('=== START tree building ===')
+	for i in range(0, 10):
+		print('=== START tree building ===')
 
-        # test_evaluator = SimpleProgramQueryEvaluator(engine=engine)
-        # splitter = ProblogSplitter(language=language,split_criterion_str='entropy', test_evaluator=test_evaluator,
-        #                            query_head_if_keys_format=prediction_goal)
-        tree_builder = default_handler.get_default_decision_tree_builder(language, prediction_goal)  # type: TreeBuilder
-        decision_tree = DecisionTree()
-        start_time = time.time()
-        decision_tree.fit(examples=examples, tree_builder=tree_builder)
-        end_time = time.time()
-        run_time_sec = end_time - start_time
-        run_time_ms = 1000.0 * run_time_sec
-        run_time_list.append(run_time_ms)
-        print("run time (ms):", run_time_ms)
+		# test_evaluator = SimpleProgramQueryEvaluator(engine=engine)
+		# splitter = ProblogSplitter(language=language,split_criterion_str='entropy', test_evaluator=test_evaluator,
+		#                            query_head_if_keys_format=prediction_goal)
+		tree_builder = default_handler.get_default_decision_tree_builder(language, prediction_goal)  # type: TreeBuilder
+		decision_tree = DecisionTree()
+		start_time = time.time()
+		decision_tree.fit(examples=examples, tree_builder=tree_builder)
+		end_time = time.time()
+		run_time_sec = end_time - start_time
+		run_time_ms = 1000.0 * run_time_sec
+		run_time_list.append(run_time_ms)
+		print("run time (ms):", run_time_ms)
 
-        print('=== END tree building ===\n')
+		print('=== END tree building ===\n')
 
-    average_run_time_ms = statistics.mean(run_time_list)
-    average_run_time_list.append((name, average_run_time_ms))
+	average_run_time_ms = statistics.mean(run_time_list)
+	average_run_time_list.append((name, average_run_time_ms))
 
-    print("average tree build time (ms):", average_run_time_ms)
-    print(decision_tree)
+	print("average tree build time (ms):", average_run_time_ms)
+	print(decision_tree)
 
-    if name == 'django':
-        print("=== start destructing examples ===")
-        for instance in examples:
-            instance.data.destruct()
-        print("=== end destructing examples ===")
+	if name == 'django':
+		print("=== start destructing examples ===")
+		for instance in examples:
+			instance.data.destruct()
+		print("=== end destructing examples ===")
 
-        print("=== start destructing tree queries ===")
-        destruct_tree_tests(decision_tree.tree)
-        print("=== start destructing tree queries ===")
+		print("=== start destructing tree queries ===")
+		destruct_tree_tests(decision_tree.tree)
+		print("=== start destructing tree queries ===")
 
 
 print ("\n=== average run times (ms) =======")
 for name, average_run_time_ms in average_run_time_list:
-    print(name, ':', average_run_time_ms)
+	print(name, ':', average_run_time_ms)
 
 
 # === average run times (ms) =======

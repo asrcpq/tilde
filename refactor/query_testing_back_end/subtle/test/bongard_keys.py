@@ -43,18 +43,18 @@ print("prediction goal:", prediction_goal)
 
 print('=== START parsing background ===')
 background_knowledge_wrapper \
-    = parse_background_knowledge_keys(fname_background_knowledge,
-                                      prediction_goal)  # type: BackgroundKnowledgeWrapper
+	= parse_background_knowledge_keys(fname_background_knowledge,
+									  prediction_goal)  # type: BackgroundKnowledgeWrapper
 
 full_background_knowledge_sp \
-    = background_knowledge_wrapper.get_full_background_knowledge_simple_program()  # type: Optional[SimpleProgram]
+	= background_knowledge_wrapper.get_full_background_knowledge_simple_program()  # type: Optional[SimpleProgram]
 print('=== END parsing background ===\n')
 # =================================================================================================================
 print('=== START parsing examples ===')
 # EXAMPLES
 example_builder = KeysExampleBuilder(prediction_goal, debug_printing_example_parsing)
 training_examples_collection = example_builder.parse(internal_ex_format, file_name_labeled_examples,
-                                                     full_background_knowledge_sp)  # type: ExampleCollection
+													 full_background_knowledge_sp)  # type: ExampleCollection
 
 # =================================================================================================================
 
@@ -62,7 +62,7 @@ print('=== START collecting labels ===')
 # LABELS
 index_of_label_var = prediction_goal_handler.get_predicate_goal_index_of_label_var()  # type: int
 label_collector = LabelCollectorMapper.get_label_collector(internal_ex_format, prediction_goal, index_of_label_var,
-                                                           engine=engine)
+														   engine=engine)
 label_collector.extract_labels(training_examples_collection)
 
 possible_labels = label_collector.get_labels()  # type: Set[Label]
@@ -97,10 +97,10 @@ print("run time (ms):", run_time_ms)
 
 test_examples = []
 for ex_wr_sp in training_examples_collection.get_example_wrappers_sp():
-    example_clause = build_clause(ex_wr_sp, training=False)
-    example = Example(data=example_clause, label=ex_wr_sp.label)
-    example.classification_term = ex_wr_sp.classification_term
-    test_examples.append(example)
+	example_clause = build_clause(ex_wr_sp, training=False)
+	example = Example(data=example_clause, label=ex_wr_sp.label)
+	example.classification_term = ex_wr_sp.classification_term
+	test_examples.append(example)
 
 statistics_handler = verify(decision_tree, test_examples)
 accuracy = statistics_handler.get_accuracy()

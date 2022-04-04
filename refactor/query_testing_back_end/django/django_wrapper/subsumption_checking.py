@@ -16,38 +16,38 @@ __matchingV11 = lib_django.MatchingV11
 
 
 def check_subsumption(hypothesis_wrapper: HypothesisWrapper, clause_wrapper: ClauseWrapper, log=False, log_indent=''):
-    hypothesis = hypothesis_wrapper.hypothesis
-    clause = clause_wrapper.clause
+	hypothesis = hypothesis_wrapper.hypothesis
+	clause = clause_wrapper.clause
 
-    # if str(clause_wrapper.clause_id) in difficult_example_ids:
-    #     snapshot_before_slow_check = tracemalloc.take_snapshot()
+	# if str(clause_wrapper.clause_id) in difficult_example_ids:
+	#     snapshot_before_slow_check = tracemalloc.take_snapshot()
 
-    start_time = time.time()
-    # TODO: Process finished with exit code 139 (interrupted by signal 11: SIGSEGV)
-    result = __matchingV11(hypothesis, clause)
-    end_time = time.time()
-    run_time_sec = end_time - start_time
-    run_time_ms = 1000.0 * run_time_sec
-    # if result:
-    #     print("Positive matching\n")
-    # else:
-    #     print("Negative matching\n")
-    result = bool(result)
+	start_time = time.time()
+	# TODO: Process finished with exit code 139 (interrupted by signal 11: SIGSEGV)
+	result = __matchingV11(hypothesis, clause)
+	end_time = time.time()
+	run_time_sec = end_time - start_time
+	run_time_ms = 1000.0 * run_time_sec
+	# if result:
+	#     print("Positive matching\n")
+	# else:
+	#     print("Negative matching\n")
+	result = bool(result)
 
-    # if str(clause_wrapper.clause_id) in difficult_example_ids:
-    #     snapshot_after_slow_check = tracemalloc.take_snapshot()
-    #     top_stats = snapshot_after_slow_check.compare_to(snapshot_before_slow_check, 'lineno')
-    #     logging.info("+++ stats for " + str(clause_wrapper.clause_id) + " +++")
-    #
-    #     for stat in top_stats[:10]:
-    #         logging.info(stat)
+	# if str(clause_wrapper.clause_id) in difficult_example_ids:
+	#     snapshot_after_slow_check = tracemalloc.take_snapshot()
+	#     top_stats = snapshot_after_slow_check.compare_to(snapshot_before_slow_check, 'lineno')
+	#     logging.info("+++ stats for " + str(clause_wrapper.clause_id) + " +++")
+	#
+	#     for stat in top_stats[:10]:
+	#         logging.info(stat)
 
-    if log:
-        logging.info(
-            log_indent + "example: "+ str(clause_wrapper.clause_id) + ", " +
-            log_indent + "subsumption: " + str(result) + ", " +
-            log_indent + "runtime: " + str(run_time_ms) + " ms" + "\n" +
-            log_indent + '--------------------------------------------------------------------------'
-        )
+	if log:
+		logging.info(
+			log_indent + "example: "+ str(clause_wrapper.clause_id) + ", " +
+			log_indent + "subsumption: " + str(result) + ", " +
+			log_indent + "runtime: " + str(run_time_ms) + " ms" + "\n" +
+			log_indent + '--------------------------------------------------------------------------'
+		)
 
-    return result, run_time_ms
+	return result, run_time_ms

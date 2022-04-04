@@ -38,32 +38,32 @@ parsed_settings = KeysSettingsParser().parse(file_name_settings)
 treebuilder_type = TreeBuilderType.DETERMINISTIC
 
 if use_clausedb:
-    internal_ex_format = InternalExampleFormat.CLAUSEDB
+	internal_ex_format = InternalExampleFormat.CLAUSEDB
 else:
-    internal_ex_format = InternalExampleFormat.SIMPLEPROGRAM
+	internal_ex_format = InternalExampleFormat.SIMPLEPROGRAM
 
 
 times = []
 #
 for i in range(0, 10):
 #
-    start = timeit.default_timer()
+	start = timeit.default_timer()
 
-    run_keys(file_name_labeled_examples, parsed_settings, internal_ex_format, treebuilder_type,
-             debug_printing_example_parsing=debug_printing_example_parsing,
-             debug_printing_tree_building=debug_printing_tree_building,
-             debug_printing_tree_pruning=debug_printing_tree_pruning,
-             debug_printing_program_conversion=debug_printing_program_conversion,
-             debug_printing_get_classifier=debug_printing_get_classifier,
-             debug_printing_classification=debug_printing_classification
-             )
+	run_keys(file_name_labeled_examples, parsed_settings, internal_ex_format, treebuilder_type,
+			 debug_printing_example_parsing=debug_printing_example_parsing,
+			 debug_printing_tree_building=debug_printing_tree_building,
+			 debug_printing_tree_pruning=debug_printing_tree_pruning,
+			 debug_printing_program_conversion=debug_printing_program_conversion,
+			 debug_printing_get_classifier=debug_printing_get_classifier,
+			 debug_printing_classification=debug_printing_classification
+			 )
 #     gc.collect()
-    end = timeit.default_timer()
+	end = timeit.default_timer()
 
 
 # print("time", end - start)
 
-    times.append(end-start)
+	times.append(end-start)
 # enable_printouts()
 print("times:", times)
 print("average duration:", statistics.mean(times), "seconds")
