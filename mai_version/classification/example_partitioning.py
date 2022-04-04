@@ -68,6 +68,8 @@ class ExamplePartitioner:
 	
 	def print_statistics(self):
 		print("nb of partitioning calls:", self.nb_partitions_calculated)
+		if self.nb_partitions_calculated == 0:
+			return
 		print("-----")
 		print("total get_evaluatable duration:", self.sum_get_evaluatable)
 		print("mean get_evaluatable duration:", self.sum_get_evaluatable / self.nb_partitions_calculated)
